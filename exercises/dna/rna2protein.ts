@@ -28,7 +28,7 @@ interface Codon {
     single: string; // 1 lettere code
 }
 
-function getCodonTable(): Codon[] {
+export function getCodonTable(): Codon[] {
     
     const codonTableTSV = fs.readFileSync(path.join(__dirname, './codon_table.tsv'), 'utf-8')
     const lines = codonTableTSV.split('\n').slice(1) // Remove header

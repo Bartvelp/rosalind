@@ -1,4 +1,4 @@
-function reverseComplement(dna: string):string {
+export function reverseComplement(dna: string):string {
     const pairs = new Map([
         ['A', 'T'],
         ['T', 'A'],
