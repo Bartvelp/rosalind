@@ -6,7 +6,7 @@
 
 // cn = sum[k to n](ck-1 * c(n-k))
 
-import { parseFasta } from "./calculateGC"
+import { parseFasta } from "./GC"
 import fs from 'fs'
 
 const catalanNumbers = [1, 1] // number of nodes [0, 2, 4, 6, 8]

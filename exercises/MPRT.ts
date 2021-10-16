@@ -1,4 +1,4 @@
-import { parseFasta } from "./calculateGC"
+import { parseFasta } from "./GC"
 import fs from 'fs'
 import fetch from 'node-fetch'
 

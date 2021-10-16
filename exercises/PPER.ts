@@ -1,4 +1,4 @@
-import { factorial } from './findGraphMatching'
+import { factorial } from './PMCH'
 
 if (require.main === module) {
     const [n, k] = process.argv.slice(2).map(e => parseInt(e))

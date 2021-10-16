@@ -1,6 +1,6 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
-import { reverseComplement } from './reverseComplement'
+import { parseFasta } from './GC'
+import { reverseComplement } from './REVC'
 
 export function findReversePalindromes(dna: string, minLen = 4, maxLen = 12) {
     const matches = []

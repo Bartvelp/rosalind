@@ -1,8 +1,8 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
-import { dna2rna } from './dna2rna'
-import { reverseComplement } from './reverseComplement'
-import { rna2protein } from './rna2protein'
+import { parseFasta } from './GC'
+import { dna2rna } from './RNA'
+import { reverseComplement } from './REVC'
+import { rna2protein } from './PROT'
 
 function findProteins(dna: string) {
     const readingFrames = getReadingFrames(dna)

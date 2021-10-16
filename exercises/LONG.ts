@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
+import { parseFasta } from './GC'
 
 /*
 The dataset is guaranteed to satisfy the following condition: 

@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
+import { parseFasta } from './GC'
 
 function findLargestSharedMotif(fastaMap: Map<string, string>): string {
     const sequences = [...fastaMap.values()]

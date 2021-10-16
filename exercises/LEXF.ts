@@ -8,7 +8,7 @@ function parseInput(path: string): [string[], number] {
     return [alphabet, length]
 }
 
-function calculateCombinations(options: string[], length: number) {
+export function calculateCombinations(options: string[], length: number) {
     const allOptions: string[] = []
     if (length === 1) return options
     const prefixOptions = calculateCombinations(options, length - 1) // [A, C, T, G]

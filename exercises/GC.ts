@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { countDNA } from './dna'
+import { countDNA } from './DNA'
 
 /** Returns map of header: sequence. */
 export function parseFasta(fileContent: string):Map<string, string> {

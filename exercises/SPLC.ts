@@ -1,7 +1,7 @@
-import { parseFasta } from "./calculateGC"
+import { parseFasta } from "./GC"
 import fs from 'fs'
-import { dna2rna } from "./dna2rna"
-import { rna2protein } from "./rna2protein"
+import { dna2rna } from "./RNA"
+import { rna2protein } from "./PROT"
 
 function removeIntrons(dna: string, introns: string[]):string {
     let newDNA = dna

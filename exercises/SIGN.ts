@@ -1,4 +1,4 @@
-import { calculateOptions } from "../math/calculatePermutations"
+import { calculateOptions } from "./PERM"
 
 export function calcSingedPermOptions(n: number): number[][] {
     const permutation = Array.from(Array(n + 1).keys()).slice(1) // inits like [1, 2, 3, 4, n]

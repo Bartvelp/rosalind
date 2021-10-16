@@ -4,10 +4,10 @@
 Author: Bart Grosman
 Date: 14-10-2021
 
-
 Description: 
 Script to solve the "Error Correction in Reads" problem on rosalind. (http://rosalind.info/problems/corr/)
-TODO
+This program finds incorrect reads in a FASTA file and tries to correct them,
+with information of other reads.
 
 Usage: python3 read_correction.py path/to/dataset.fasta
 """
@@ -64,24 +64,45 @@ def split_correct_reads(sequences: list):
     Returns:
     Tuple like (correct_reads, incorrect_reads)
     """
-    # Sort each sequence so the sequence and the
-    # reverse complement are always in the same order
-    reads = [sorted(sequence_pair) for sequence_pair in sequences]
+    # Store the reads in the next lists, could also use dicts
+    # for better performance but worse readability
     incorrect_reads = []
     correct_reads = []
-    for read in reads:
-        if read in correct_reads:
+    for read in sequences:
+        reverse_read = tuple(sorted(read))
+        if read in correct_reads or reverse_read in correct_reads:
             # Do nothing, since it already was a correct read
             pass
-        elif read not in incorrect_reads:
-            # It's new so add it to incorrect reads
-            incorrect_reads.append(read)
-        else:
+        elif read in incorrect_reads:
             # We already have in the incorrect reads, thus it must be a correct read
             incorrect_reads.remove(read)
             correct_reads.append(read)
+        elif reverse_read in incorrect_reads:
+            # We already have the reverse in incorrect reads, so remove it
+            incorrect_reads.remove(reverse_read)
+            correct_reads.append(read)     
+        else:
+            # It's new so add it to incorrect reads
+            incorrect_reads.append(read)
     return (correct_reads, incorrect_reads)
 
+def calc_hamm_dist(read_one: str, read_two: str):
+    """ Calculates the hamming distance, i.e. the number of different bases,
+    for 2 DNA sequences.
+    Reads are assumed to be of equal length
+
+    Keyword arguments:
+    read_one -- First DNA sequence
+    read_two -- Second DNA sequence, that is compared to the first one
+
+    Returns:
+    int, number of different bases
+    """
+    num_diff = 0
+    for base_one, base_two in zip(read_one, read_two):
+        if base_one != base_two:
+            num_diff += 1
+    return num_diff
 
 def find_corrections(incorrect_reads: list, correct_reads: list):
     """ Finds the corrections to incorrect reads by searching the correct reads
@@ -95,7 +116,14 @@ def find_corrections(incorrect_reads: list, correct_reads: list):
     [('incorrxct', 'incorrect'), ...]
     """
     corrected_reads = []
-    
+    for read_forw, read_rev in incorrect_reads:
+        # Find the correct read
+        for correct_read_pair in correct_reads:
+            for correct_read in correct_read_pair: # Check both forward and reverse
+                if calc_hamm_dist(read_forw, correct_read) == 1:
+                    # Found it, add a tuple to the stored list
+                    corrected_reads.append((read_forw, correct_read))
+    return corrected_reads
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -109,5 +137,8 @@ if __name__ == "__main__":
     sequences = [(sequence, rev_comp(sequence)) for sequence in forward_sequences]
     # Split out the duplicates, and thus the correct reads
     correct_reads, incorrect_reads = split_correct_reads(sequences)
-    # Now fix the incorrect reads
-    print(incorrect_reads)
+    # Now correct the incorrect reads
+    corrections = find_corrections(incorrect_reads, correct_reads)
+    # Last, print the corrections
+    for original, correction in corrections:
+        print("{}->{}".format(original, correction))

@@ -1,4 +1,4 @@
-import { getCodonTable } from "./rna2protein";
+import { getCodonTable } from "./PROT";
 
 function calcNumOptions(proteinStr: string) {
     const codonTable = getCodonTable()

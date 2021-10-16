@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
+import { parseFasta } from './GC'
 
 type Edge = [string, string]
 

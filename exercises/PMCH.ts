@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
+import { parseFasta } from './GC'
 
 function calcNumPerfectMatchings(rna: string) {
     const numA = (rna.match(/A/g)||[]).length

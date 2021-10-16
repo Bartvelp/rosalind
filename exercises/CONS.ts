@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { parseFasta } from './calculateGC'
+import { parseFasta } from './GC'
 
 const bases = ['A', 'C', 'G', 'T']
 
