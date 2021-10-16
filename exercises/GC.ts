@@ -3,7 +3,7 @@ import { countDNA } from './DNA'
 
 /** Returns map of header: sequence. */
 export function parseFasta(fileContent: string):Map<string, string> {
-    const lines = fileContent.split('\n')
+    const lines = fileContent.replaceAll('\r', '').split('\n')
     const fastaMap:Map<string, string> = new Map()
     
     let currentHeader = ''
