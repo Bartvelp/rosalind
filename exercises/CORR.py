@@ -69,7 +69,7 @@ def split_correct_reads(sequences: list):
     incorrect_reads = []
     correct_reads = []
     for read in sequences:
-        reverse_read = tuple(sorted(read))
+        reverse_read = tuple(reversed(read))
         if read in correct_reads or reverse_read in correct_reads:
             # Do nothing, since it already was a correct read
             pass
