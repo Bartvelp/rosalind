@@ -1,0 +1,12 @@
+{
+    "deno.enable": true,
+    "deno.unstable": true,
+    "deno.enablePaths": [
+        "./exercises/LCSQ_deno.ts", 
+        "./exercises/SPEC_deno.ts",
+        "./exercises/CONV_deno.ts",
+        "./exercises/PRSM_deno.ts",
+        "./exercises/TRIE_deno.ts",
+        "./exercises/LREP_deno.ts",
+    ]
+}

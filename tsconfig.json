@@ -5,7 +5,8 @@
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
       "lib":["esnext", "es2020", "ES2020.Promise"],
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "module": "es2022"
     },
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "Recommended"

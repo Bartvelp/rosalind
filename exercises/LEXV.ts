@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { calculateCombinations } from './LEXF'
 
-function generateAllOptions(alphabet: string[], maxLen: number) {
+export function generateAllOptions(alphabet: string[], maxLen: number) {
     const allOptions = []
     for (let i = 1; i <= maxLen; i++) allOptions.push(...calculateCombinations(alphabet, i))
     return allOptions

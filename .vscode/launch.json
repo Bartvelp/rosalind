@@ -5,19 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ts-node",
-            "type": "node",
             "request": "launch",
-            "args": [
-                "${relativeFile}"
-            ],
+            "name": "Launch Program",
+            "type": "node",
+            "program": "${workspaceFolder}/exercises/CONV_deno.ts",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "/home/bart/.deno/bin/deno",
             "runtimeArgs": [
-                "-r",
-                "ts-node/register"
+                "run",
+                "--unstable",
+                "--inspect",
+                "--inspect-brk",
+                "--allow-all"
             ],
-            "cwd": "${workspaceRoot}",
-            "protocol": "inspector",
-            "internalConsoleOptions": "openOnSessionStart"
+            "attachSimplePort": 9229
         }
     ]
 }
