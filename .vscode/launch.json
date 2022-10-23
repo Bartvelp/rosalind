@@ -8,7 +8,7 @@
             "request": "launch",
             "name": "Launch Program",
             "type": "node",
-            "program": "${workspaceFolder}/exercises/CONV_deno.ts",
+            "program": "${workspaceFolder}/exercises/SUFF_deno.ts",
             "cwd": "${workspaceFolder}",
             "runtimeExecutable": "/home/bart/.deno/bin/deno",
             "runtimeArgs": [

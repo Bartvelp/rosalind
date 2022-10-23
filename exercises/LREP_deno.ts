@@ -19,7 +19,7 @@ node14 node15 6 5
 node14 node16 10 1
 `
 
-type Edge = {
+export type Edge = {
     parentLabel: string;
     childLabel: string;
     startLoc: number;
@@ -74,16 +74,6 @@ function extractNodes(suffixTree: Edge[]) {
     }
 }
 
-function findPathOptions(suffixTree: Edge[], curNode: string) {
-    const pathOptions = suffixTree.filter(edge => edge.parentLabel === curNode)
-    return pathOptions
-}
-
-function findAllSuffixes(suffixTree: Edge[], internalNodes: string[], curNode = 'node1') {
-    const allPathOptions = findPathOptions(suffixTree, curNode)
-
-}
-
 function findAllParentNodes(suffixTree: Edge[], curNode: string):string[] {
     const parentNodes = []
     for (const edge of suffixTree) {
@@ -115,7 +105,6 @@ function findNumTravelledNodes(suffixTree: Edge[], leafNodes: string[]) {
     }))
     for (const leafNode of leafNodes) {
         const parentNodes = findAllParentNodes(suffixTree, leafNode)
-        console.log(leafNode, 'has', parentNodes, 'as parents')
         for (const parentNode of parentNodes) {
             const curCount = nodeNumTravelled.get(parentNode) ?? 0
             nodeNumTravelled.set(parentNode, curCount + 1)
@@ -127,29 +116,27 @@ function findNumTravelledNodes(suffixTree: Edge[], leafNodes: string[]) {
 function findSuffixes(suffixTree: Edge[], startNodes: string[], sequence: string) {
     return startNodes.map(startNode => {
         const parentEdges = findEdgesLeadingToRoot(suffixTree, startNode)
-        // Now build up the string
-        let suffix = ''
-        for (const edge of parentEdges) {
-            suffix += sequence.slice(edge.startLoc - 1, edge.startLoc + edge.length - 1)
-        }
-        return suffix
+        const parentStrings = parentEdges.map(edge => sequence.slice(edge.startLoc - 1, edge.startLoc + edge.length - 1))
+        const suffix = parentStrings.reverse().join('')
+        return {startNode, parentEdges, parentStrings, suffix}
     })
 }
 
-// NOT WORKING FOR ONE BIT
 if (import.meta.main) {
     const rawDataset = Deno.args.length === 0
         ? sampleDataSet
         : Deno.readTextFileSync(Deno.args[0])
+
     const dataset = parseDataset(rawDataset)
     const nodes = extractNodes(dataset.suffixTree)
-    console.log(nodes)
+    
+    // Below step is CPU intensive
     const numTravelledNodes = findNumTravelledNodes(dataset.suffixTree, nodes.leafNodes)
     const relevantNodes = [...numTravelledNodes.entries()]
         .filter(([_, numTravelled]) => numTravelled >= dataset.k)
         .map(([node, _]) => node)
+
     const suffixes = findSuffixes(dataset.suffixTree, relevantNodes, dataset.sequence)
-    console.log(numTravelledNodes)
-    console.log(relevantNodes)
-    console.log(suffixes)
+    const bestSuffix = suffixes.reduce((bestSoFar, curSuffix) => curSuffix.suffix.length > bestSoFar.suffix.length ? curSuffix : bestSoFar)
+    console.log(bestSuffix.suffix)
 }

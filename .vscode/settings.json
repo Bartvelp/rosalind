@@ -8,5 +8,6 @@
         "./exercises/PRSM_deno.ts",
         "./exercises/TRIE_deno.ts",
         "./exercises/LREP_deno.ts",
+        "./exercises/SUFF_deno.ts",
     ]
 }
