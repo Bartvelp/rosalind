@@ -49,7 +49,7 @@ function parseDataset(rawDataset: string) {
     }
 }
 
-function extractNodes(suffixTree: Edge[]) {
+export function extractNodes(suffixTree: Edge[]) {
     // Find all internal and external nodes
     const nodeDegrees = new Map(suffixTree.map(edge => {
         return [edge.childLabel, 1]
@@ -99,7 +99,7 @@ function findEdgesLeadingToRoot(suffixTree: Edge[], curNode: string):Edge[] {
     return edgesToRoot
 }
 
-function findNumTravelledNodes(suffixTree: Edge[], leafNodes: string[]) {
+export function findNumTravelledNodes(suffixTree: Edge[], leafNodes: string[]) {
     const nodeNumTravelled = new Map(suffixTree.map(edge => {
         return [edge.childLabel, 0]
     }))
