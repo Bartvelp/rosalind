@@ -1,4 +1,4 @@
-import { genAllSuffixes, genTree, makeRandomDNAstring, Edge } from "./SUFF_deno.ts";
+import { genAllSuffixes, genTree } from "./SUFF_deno.ts";
 
 export function getTree(sequence: string) {
     const allSuffixes = genAllSuffixes(sequence)
